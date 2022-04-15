@@ -1,0 +1,13 @@
+[package]
+name = "tongs-client"
+version = "0.0.0"
+authors = ["Shoyu Vanilla <modulo641@gmail.com>"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2.80"
+yew = "0.19.3"
+yew-router = "0.16.0"

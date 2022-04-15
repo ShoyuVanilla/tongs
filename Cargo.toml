@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "crates/tongs-server",
+    "crates/tongs-client",
+    "crates/shared",
+]
