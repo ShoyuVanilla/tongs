@@ -1,18 +1,12 @@
-use actix_web::{App, HttpServer};
-use actix_web_lab::web::spa;
+use tongs_server::application::Application;
+use tongs_server::tracing::{get_subscriber, init_subscriber};
 
 #[tokio::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new().service(
-            spa()
-                .index_file("./static/index.html")
-                .static_resources_mount("/static")
-                .static_resources_location("./static")
-                .finish(),
-        )
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+async fn main() -> anyhow::Result<()> {
+    let subscriber = get_subscriber("tongs".to_string(), "info".to_string(), std::io::stdout);
+    init_subscriber(subscriber);
+
+    let application = Application::build().await?;
+    application.run().await?;
+    Ok(())
 }
